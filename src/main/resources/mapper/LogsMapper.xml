@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.winger.mapper.LogsMapper">
+    <insert id="addLog" parameterType="com.winger.entity.Logs">
+		insert into log (content, create_time, reserve_time, user_name, target, title) values
+		(#{content},#{create_time},#{reserve_time},#{user_name},#{target},#{title})
+	</insert>
+	<select id="getLogs" resultType="com.winger.entity.Logs">
+		select * from log order by log.id desc
+	</select>
+	<select id="queryCounts" resultType="int">
+		select count(*) from log
+	</select>
+	<select id="queryCountsBySelect" parameterType="com.winger.entity.Logs" resultType="int">
+		select count(*) from log
+		<where>
+			<if test="title!='' and title!=null">and title LIKE '%' #{title} '%'</if>
+			<if test="target!='' and target!=null">and target LIKE '%' #{target} '%'</if>
+		</where>
+	</select>
+	<select id="queryLogs" parameterType="com.winger.entity.Logs" resultType="com.winger.entity.Logs">
+		select * from log
+		<where>
+			<if test="title!='' and title!=null">and title LIKE '%' #{title} '%'</if>
+			<if test="target!='' and target!=null">and target LIKE '%' #{target} '%'</if>
+		</where>
+	</select>
+	<delete id="delLog" parameterType="int">
+		delete from log where id=#{id}
+	</delete>
+	<select id="getLogById" parameterType="int" resultType="com.winger.entity.Logs">
+		select * from log where id=#{id}
+	</select>
+	<update id="updateLog" parameterType="com.winger.entity.Logs">
+		update log set
+		title=#{title},
+		content=#{content},
+		create_time=#{create_time},
+		reserve_time=#{reserve_time},
+		user_name=#{user_name},
+		target=#{target}
+		where id=#{id}
+	</update>
+</mapper>

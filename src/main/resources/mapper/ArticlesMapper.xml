@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.winger.mapper.ArticlesMapper">
+    <insert id="addArticles" parameterType="com.winger.entity.Articles">
+    insert into article (title, type, sources, user_name, time) values (#{title},#{type},
+    #{sources},#{user_name},#{time})
+    </insert>
+    <select id="getArticles" resultType="com.winger.entity.Articles">
+        select * from article order by article.id desc
+    </select>
+    <select id="getArticlesById" parameterType="int" resultType="com.winger.entity.Articles">
+        select * from article where id=#{id}
+    </select>
+    <update id="updateArticles" parameterType="com.winger.entity.Articles">
+        update article set
+        title=#{title},
+        type=#{type},
+        sources=#{sources},
+        user_name=#{user_name},
+        time=#{time}
+        where id=#{id}
+    </update>
+    <select id="queryArticles" parameterType="com.winger.entity.Articles" resultType="com.winger.entity.Articles">
+        select * from article
+        <where>
+            <if test="title!=null and title!=''">
+                and title LIKE '%' #{title} '%'
+            </if>
+            <if test="type!='' and type!=null">and type=#{type}</if>
+        </where>
+    </select>
+    <select id="queryCounts" resultType="int">
+        select count(*) from article
+    </select>
+    <select id="queryCountsBySelect" parameterType="com.winger.entity.Articles" resultType="int">
+        select count(*) from article
+        <where>
+            <if test="title!=null and title!=''">
+                and title LIKE '%' #{title} '%'
+            </if>
+            <if test="type!='' and type!=null">and type=#{type}</if>
+        </where>
+    </select>
+    <delete id="delArticles" parameterType="int">
+        delete from article where id=#{id}
+    </delete>
+</mapper>

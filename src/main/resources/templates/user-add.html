@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="/lib/html5shiv.js"></script>
+<script type="text/javascript" src="/lib/respond.min.js"></script>
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="/static/h-ui/css/H-ui.min.css"/>
+<link rel="stylesheet" type="text/css" href="/static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="/lib/Hui-iconfont/1.0.8/iconfont.css" />
+<link type="text/css" rel="stylesheet" href="/static/h-ui.admin/css/H-ui.admin.css"/>
+<link type="text/css" rel="stylesheet" href="/static/h-ui.admin/css/style.css"/>
+<![endif]-->
+<title>添加员工</title>
+</head>
+<body>
+<article class="page-container">
+  <form class="form form-horizontal" id="form-admin-add">
+    <div class="row cl">
+      <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>账户名：</label>
+      <div class="formControls data-xs-8">
+        <input type="text" class="input-text" value="" placeholder="" id="adminName" name="adminName">
+      </div>
+      <button class="btn btn-success radius" type="button" id="check_username"><i class="icon-ok"></i>检测用户名</button>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>员工姓名：</label>
+      <div class="formControls col-xs-8 col-sm-9">
+        <input type="text" class="input-text" value="" placeholder="" id="realName" name="realName">
+      </div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>初始密码：</label>
+      <div class="formControls col-xs-8 col-sm-9">
+        <input type="password" class="input-text" autocomplete="off" value="" placeholder="密码" id="_password" name="_password">
+      </div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>确认密码：</label>
+      <div class="formControls col-xs-8 col-sm-9">
+        <input type="password" class="input-text" autocomplete="off"  placeholder="确认新密码" id="confirmPassword" name="confirmPassword">
+      </div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>性别：</label>
+      <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+        <div class="radio-box">
+          <input name="_sex" type="radio" id="sex-1" value="男" checked>
+          <label for="sex-1">男</label>
+        </div>
+        <div class="radio-box">
+          <input type="radio" id="sex-0" value="女" name="_sex">
+          <label for="sex-0">女</label>
+        </div>
+      </div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>出生日期：</label>
+      <input type="date" style="width: 200px; margin-left: 15px;"
+             class="input-text" value="" placeholder="" id="_birthday"
+             name="_birthday">
+    </div>
+    <div class="row cl">
+      <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>手机：</label>
+      <div class="formControls col-xs-8 col-sm-9">
+        <input type="text" class="input-text" value="" placeholder="" id="phone" name="phone">
+      </div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>邮箱：</label>
+      <div class="formControls col-xs-8 col-sm-9">
+        <input type="text" class="input-text" placeholder="@" name="email" id="email">
+      </div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-xs-4 col-sm-3">职位：</label>
+      <div class="formControls col-xs-8 col-sm-9">
+        <span class="select-box" style="width:150px;">
+			<select class="select" name="_userPosition" id="_userPosition" size="1">
+				<option value="业务员">业务员</option>
+				<option value="销售员">销售员</option>
+				<option value="推销员">推销员</option>
+				<option value="业务经理">业务经理</option>
+				<option value="销售经理">销售经理</option>
+			</select>
+        </span>
+      </div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-xs-4 col-sm-3">权限：</label>
+      <div class="formControls col-xs-8 col-sm-9">
+        <span class="select-box" style="width:150px;">
+			<select class="select" name="_role" id="_role" size="1">
+				<option value="user">user</option>
+				<option value="admin">admin</option>
+			</select>
+        </span>
+      </div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-xs-4 col-sm-3">备注：</label>
+      <div class="formControls col-xs-8 col-sm-9">
+        <textarea cols="" rows="" class="textarea" name="_remark" id="_remark" placeholder="员工备注...255个字符以内" dragonfly="true"></textarea>
+      </div>
+    </div>
+    <div class="row cl">
+      <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+        <button class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe676;</i> 提交</button>
+        <button class="btn btn-primary radius" type="button"><a style="color: white" href="javascript:location.replace(location.href);"><i class="Hui-iconfont">&#xe68f;</i> 重置</a></button>
+      </div>
+    </div>
+  </form>
+</article>
+
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src="/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="/static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" src="/js/user-add.js"></script>
+</body>
+</html>

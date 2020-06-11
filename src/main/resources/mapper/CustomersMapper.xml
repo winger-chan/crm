@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.winger.mapper.CustomersMapper">
+    <insert id="addCustomers" parameterType="com.winger.entity.Customers">
+        insert into customer(name,sex,department,position,birthday,phone,email,weChat,qq,contact_desc,requirement,interest,status,enterprise_id,enterprise_name,user_name,create_name)
+        values (#{name},#{sex},#{department},#{position},#{birthday},#{phone},
+        #{email},#{weChat},#{qq},#{contact_desc},#{requirement},#{interest},#{status},#{enterprise_id},#{enterprise_name},#{user_name},#{create_name})
+    </insert>
+   <select id="customersList" resultType="com.winger.entity.Customers">
+       select * from customer
+   </select>
+    <delete id="delCustomers" parameterType="com.winger.entity.Customers">
+         delete from customer
+         <where>
+             <if test="id!=0">id=#{id}</if>
+             <if test="status!='' and status!=null">status=#{status}</if>
+         </where>
+    </delete>
+    <select id="getCustomersById" parameterType="int" resultType="com.winger.entity.Customers">
+        select * from customer where id=#{id};
+    </select>
+    <select id="queryCounts" resultType="int">
+        select count(*) from customer
+    </select>
+    <select id="queryCountsBySelect" parameterType="com.winger.entity.Customers" resultType="int">
+        select count(*) from customer
+        <where>
+            <if test="enterprise_name!=null and enterprise_name!=''">
+                and enterprise_name LIKE '%' #{enterprise_name} '%'
+            </if>
+            <if test="name!=null and name!=''">
+                and name LIKE '%' #{name} '%'
+            </if>
+            <if test="sex!='' and sex!=null">and sex=#{sex}</if>
+            <if test="status!=null and status!=''">and status=#{status}</if>
+            <if test="user_name!=null and user_name!=''">and user_name=#{user_name}</if>
+        </where>
+    </select>
+    <select id="queryCustomers" parameterType="com.winger.entity.Customers" resultType="com.winger.entity.Customers">
+        select * from customer
+        <where>
+            <if test="enterprise_name!=null and enterprise_name!=''">
+                and enterprise_name LIKE '%' #{enterprise_name} '%'
+            </if>
+            <if test="name!=null and name!=''">
+                and name LIKE '%' #{name} '%'
+            </if>
+            <if test="sex!='' and sex!=null">and sex=#{sex}</if>
+            <if test="status!=null and status!=''">and status=#{status}</if>
+            <if test="user_name!=null and user_name!=''">and user_name=#{user_name}</if>
+        </where>
+    </select>
+    <update id="updateCustomers" parameterType="com.winger.entity.Customers">
+        update customer set
+        name=#{name},
+        department=#{department},
+        position=#{position},
+        birthday=#{birthday},
+        phone=#{phone},
+        email=#{email},
+        weChat=#{weChat},
+        qq=#{qq},
+        contact_desc=#{contact_desc},
+        requirement=#{requirement},
+        interest=#{interest},
+        enterprise_id=#{enterprise_id},
+        enterprise_name=#{enterprise_name},
+        status=#{status},
+        sex=#{sex},
+        user_name=#{user_name},
+        create_name=#{create_name}
+        where id=#{id}
+    </update>
+</mapper>

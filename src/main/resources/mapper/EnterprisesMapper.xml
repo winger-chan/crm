@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.winger.mapper.EnterprisesMapper">
+    <select id="getEnterprises" resultType="com.winger.entity.Enterprises">
+		SELECT * FROM enterprise
+	</select>
+    <select id="getEnterprisesById" parameterType="int" resultType="com.winger.entity.Enterprises">
+		SELECT * FROM enterprise WHERE enterprise_id = #{id}
+	</select>
+    <select id="queryEnterprises" parameterType="com.winger.entity.Enterprises" resultType="com.winger.entity.Enterprises">
+        SELECT * FROM enterprise
+        <where>
+            <if test="enterprise_name!=null and enterprise_name!=''">
+                and enterprise_name LIKE '%' #{enterprise_name} '%'
+            </if>
+            <if test="enterprise_background!=''">
+                and enterprise_background =#{enterprise_background}
+            </if>
+            <if test="listed!=''">
+                and listed =#{listed}
+            </if>
+            <if test="user_name!=''">
+                and user_name =#{user_name}
+            </if>
+            <if test="status!=''">
+                and status =#{status}
+            </if>
+        </where>
+    </select>
+    <select id="queryCounts" resultType="int">
+        select count(*) from enterprise
+    </select>
+    <select id="queryCountsBySelect" parameterType="com.winger.entity.Enterprises" resultType="int">
+        select count(*) from enterprise
+        <where>
+            <if test="enterprise_name!=null and enterprise_name!=''">
+                and enterprise_name LIKE '%' #{enterprise_name} '%'
+            </if>
+            <if test="enterprise_background!=''">
+                and enterprise_background =#{enterprise_background}
+            </if>
+            <if test="listed!=''">
+                and listed =#{listed}
+            </if>
+            <if test="user_name!=''">
+                and user_name =#{user_name}
+            </if>
+            <if test="status!=''">
+                and status =#{status}
+            </if>
+        </where>
+    </select>
+    <insert id="insertEnterprise" parameterType="com.winger.entity.Enterprises">
+		insert into
+		enterprise(enterprise_name,enterprise_type,enterprise_background,
+		listed,reg_capital,year_sales,enter_scale,url,
+		zip_code,address,major_services,main_products,status,
+		user_name,create_time,create_name)
+		values(#{enterprise_name},#{enterprise_type},
+		#{enterprise_background},#{listed},#{reg_capital},#{year_sales},
+		#{enter_scale},#{url},#{zip_code},
+		#{address},#{major_services},#{main_products},#{status},
+		#{user_name},#{create_time},#{create_name});
+	</insert>
+    <update id="updateEnterprise" parameterType="com.winger.entity.Enterprises">
+        UPDATE enterprise set
+            enterprise_name=#{enterprise_name},
+            enterprise_type=#{enterprise_type},
+            enterprise_background=#{enterprise_background},
+            listed=#{listed},
+            reg_capital=#{reg_capital},
+            year_sales=#{year_sales},
+            enter_scale=#{enter_scale},
+            url=#{url},
+            zip_code=#{zip_code},
+            address=#{address},
+            major_services=#{major_services},
+            main_products=#{main_products},
+            status=#{status},
+            user_name=#{user_name},
+            create_time=#{create_time},
+            create_name=#{create_name}
+        WHERE enterprise_id=#{enterprise_id}
+    </update>
+    <delete id="delEnterprises" parameterType="com.winger.entity.Enterprises">
+		DELETE FROM enterprise
+		<where>
+            <if test="enterprise_id != 0">enterprise_id=#{enterprise_id}</if>
+            <if test="status != '' and status != null">and status=#{status}</if>
+        </where>
+	</delete>
+</mapper>
